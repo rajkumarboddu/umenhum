@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('css/bootstrap/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('css/register.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{url('css/sweetalert.css')}}" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <script type="text/javascript" src="{{url('js/bootstrap/jquery-2.1.1.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/bootstrap/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/sweetalert.min.js')}}"></script>

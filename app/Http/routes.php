@@ -18,6 +18,13 @@ Route::post('signup/sendOtp','UserController@sendOtpForSignup');
 Route::post('signup/verifyOtp','UserController@verifyOtpForSignup');
 Route::post('doLogin','UserController@doLogin');
 
+Route::get('admin/login', 'AdminController@loadLoginPage');
+Route::get('admin/dashboard', 'AdminController@loadDashboardPage');
+Route::post('admin/doLogin','AdminController@doLogin');
+Route::get('admin/logout','AdminController@doLogout');
+Route::get('admin/create-user','AdminController@loadCreateUserPage');
+Route::post('admin/createUser','UserController@createUser');
+
 Route::group(['middleware' => 'auth'],function(){
     Route::get('dashboard','MainController@loadDashboardPage');
     Route::get('getSubTree/{parent_id}','TreePathController@getFullTree');
@@ -25,3 +32,6 @@ Route::group(['middleware' => 'auth'],function(){
 });
 
 Route::get('test/{id}','TreePathController@getFullTree');
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
