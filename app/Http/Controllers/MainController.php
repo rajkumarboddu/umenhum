@@ -25,7 +25,6 @@ class MainController extends Controller
     }
 
     public static function sendOtp($mobile,$msg){
-
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', "http://202.62.67.34/smpp.sms?username=9848973314&password=73314&to=91$mobile&from=RYLTRV&text=$msg");
         if(intval($res->getStatusCode())==200){

@@ -18,20 +18,23 @@ Route::post('signup/sendOtp','UserController@sendOtpForSignup');
 Route::post('signup/verifyOtp','UserController@verifyOtpForSignup');
 Route::post('doLogin','UserController@doLogin');
 
-Route::get('admin/login', 'AdminController@loadLoginPage');
-Route::get('admin/dashboard', 'AdminController@loadDashboardPage');
-Route::post('admin/doLogin','AdminController@doLogin');
-Route::get('admin/logout','AdminController@doLogout');
-Route::get('admin/create-user','AdminController@loadCreateUserPage');
-Route::post('admin/createUser','UserController@createUser');
-
 Route::group(['middleware' => 'auth'],function(){
     Route::get('dashboard','MainController@loadDashboardPage');
     Route::get('getSubTree/{parent_id}','TreePathController@getFullTree');
     Route::get('logout','UserController@doLogout');
 });
 
-Route::get('test/{id}','TreePathController@getFullTree');
-Route::auth();
+Route::group(['prefix'=>'admin'],function(){
+    Route::get('login', 'AdminController@loadLoginPage');
+    Route::post('doLogin','AdminController@doLogin');
 
-Route::get('/home', 'HomeController@index');
+    // needs authentication
+    Route::group(['middleware'=>'auth:admins'],function(){
+        Route::get('dashboard', 'AdminController@loadDashboardPage');
+        Route::get('logout','AdminController@doLogout');
+        Route::get('create-user','AdminController@loadCreateUserPage');
+        Route::post('createUser','UserController@createUser');
+    });
+});
+
+Route::get('test/{id}','TreePathController@getFullTree');
