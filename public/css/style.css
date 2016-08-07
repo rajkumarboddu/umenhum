@@ -196,6 +196,7 @@ textarea {
 	
 	border-bottom:3px solid #ff7f74;
 	color: #383838;
+	border-right: 1px solid #d9d9d9;
 }
     
 
@@ -1198,6 +1199,16 @@ color: #333;
 	border: 5px solid #47d147;
 }
 
+.dataTables_length > label > select{
+	display: inline-block;
+	width: 80px;
+	margin: 5px 5px 8px 5px;
+}
+
+.dataTables_filter > label > input{
+	display: inline-block;
+	margin-top: 5px;
+}
 
 /*------------------------------------------------------------------
 [1. Max Width: 480px]

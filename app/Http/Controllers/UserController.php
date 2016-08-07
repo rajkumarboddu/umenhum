@@ -17,6 +17,15 @@ use App\Http\Helpers\Utils;
 
 class UserController extends Controller
 {
+    public function getUsers(){
+        return DB::table('users as u')
+                ->join('tree_paths as t','t.descendant_id','=','u.id')
+                ->join('users as a','a.id','=','t.ancestor_id')
+                ->where('u.id','<>',Auth::guard('admins')->user()->user_id)
+                ->select('u.first_name','u.mobile','u.email','a.first_name as referred_by','u.id','u.created_at')
+                ->get();
+    }
+
     public function sendOtpForSignup(Request $request){
         $validator = Validator::make($request->all(),[
             'first_name' => 'required|regex:/^[a-z\sA-Z]*$/|min:3',

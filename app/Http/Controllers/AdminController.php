@@ -27,6 +27,10 @@ class AdminController extends Controller
         return view('admin.new-user');
     }
 
+    public function loadUsersPage(){
+        return view('admin.users-list');
+    }
+
     public function doLogin(Request $request){
         $validator = Validator::make($request->all(),[
             'username' => 'required',

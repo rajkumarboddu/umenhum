@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin'],function(){
     // needs authentication
     Route::group(['middleware'=>'auth:admins'],function(){
         Route::get('dashboard', 'AdminController@loadDashboardPage');
+        Route::get('users-list', 'AdminController@loadUsersPage');
         Route::get('logout','AdminController@doLogout');
         Route::get('create-user','AdminController@loadCreateUserPage');
         Route::post('createUser','UserController@createUser');

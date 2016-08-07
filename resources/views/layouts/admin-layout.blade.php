@@ -46,6 +46,7 @@
             <ul class="mainnav">
                 <li class="active"><a href="{{url('admin/dashboard')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
                 <li class="active"><a href="{{url('admin/create-user')}}"><i class="icon-building"></i><span>Create User</span></a></li>
+                <li class="active"><a href="{{url('admin/users-list')}}"><i class="fa fa-users"></i><span>Users</span></a></li>
             </ul>
             <!--<li class="active"><a href="contact_table.php"><i class="icon-dashboard"></i><span>Contact</span> </a> </li>-->
             </ul>

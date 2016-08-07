@@ -6,27 +6,24 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Dashboard</h2>
+        <div class="col-md-12">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="clearfix"></div>
+        <div class="counter-container">
+            <div class="counter-head">
+                Total users
+            </div>
+            <div class="counter-circle counter">
+                {{\App\Http\Controllers\TreePathController::getDescendantsCount(Auth::guard('admins')->user()->user_id)}}
             </div>
         </div>
-        <div class="row">
-            <div class="counter-container">
-                <div class="counter-head">
-                    Total users
-                </div>
-                <div class="counter-circle counter">
-                    {{\App\Http\Controllers\TreePathController::getDescendantsCount(Auth::guard('admins')->user()->user_id)}}
-                </div>
+        <div class="counter-container">
+            <div class="counter-head">
+                # Referred by me
             </div>
-            <div class="counter-container">
-                <div class="counter-head">
-                    # Referred by me
-                </div>
-                <div class="counter-circle counter">
-                    {{\App\Http\Controllers\TreePathController::getChildCount(Auth::guard('admins')->user()->user_id)}}
-                </div>
+            <div class="counter-circle counter">
+                {{\App\Http\Controllers\TreePathController::getChildCount(Auth::guard('admins')->user()->user_id)}}
             </div>
         </div>
     </div>
@@ -39,8 +36,8 @@
     <script>
         $(document).ready(function(){
             $('.counter').counterUp({
-                delay: 10,
-                time: 1000
+                delay: 5,
+                time: 500
             });
         });
     </script>
