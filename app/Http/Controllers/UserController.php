@@ -22,6 +22,7 @@ class UserController extends Controller
                 ->join('tree_paths as t','t.descendant_id','=','u.id')
                 ->join('users as a','a.id','=','t.ancestor_id')
                 ->where('u.id','<>',Auth::guard('admins')->user()->user_id)
+                ->where('t.depth',1)
                 ->select('u.first_name','u.mobile','u.email','a.first_name as referred_by','u.id','u.created_at')
                 ->get();
     }
