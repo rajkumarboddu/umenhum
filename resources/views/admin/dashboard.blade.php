@@ -17,7 +17,7 @@
                     Total users
                 </div>
                 <div class="counter-circle counter">
-                {{\App\Http\Controllers\TreePathController::getChildCount(Auth::guard('admins')->user()->user_id)}}
+                    {{\App\Http\Controllers\TreePathController::getDescendantsCount(Auth::guard('admins')->user()->user_id)}}
                 </div>
             </div>
             <div class="counter-container">
@@ -25,7 +25,7 @@
                     # Referred by me
                 </div>
                 <div class="counter-circle counter">
-                    {{\App\Http\Controllers\TreePathController::getDescendantsCount(Auth::guard('admins')->user()->user_id)}}
+                    {{\App\Http\Controllers\TreePathController::getChildCount(Auth::guard('admins')->user()->user_id)}}
                 </div>
             </div>
         </div>
