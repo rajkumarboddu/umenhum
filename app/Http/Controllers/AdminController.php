@@ -36,9 +36,10 @@ class AdminController extends Controller
             return back()->with('msg',$validator->errors()->all()[0]);
         }
         if(Auth::guard('admins')->attempt(['username'=>$request->username,'password'=>$request->password])){
-            return view('admin.dashboard');
+            return redirect('admin/dashboard');
         } else{
             return back()->with('msg','Invalid username/password');
         }
     }
+
 }

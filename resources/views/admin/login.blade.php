@@ -61,7 +61,7 @@
     <div class="content clearfix">
         <form action="{{url('admin/doLogin')}}" method="post">
             <h1>Admin Login</h1>
-            @if(session('msg'))<h5> {{session('msg')}} </h5>@endif
+            @if(session('msg'))<h5 style="color:red;margin-bottom: 15px;"> {{session('msg')}} </h5>@endif
             <div class="login-fields">
                 <div class="field">
                     <label for="username">Username</label>

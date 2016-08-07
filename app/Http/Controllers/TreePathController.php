@@ -25,6 +25,10 @@ class TreePathController extends Controller
         return TreePath::where('ancestor_id',$parent_id)->where('depth',1)->count();
     }
 
+    public static function getDescendantsCount($parent_id){
+        return TreePath::where('ancestor_id',$parent_id)->count();
+    }
+
     public function getChildren($parent_id){
         $children = DB::table('tree_paths as t')
                 ->join('users as u','u.id','=','t.descendant_id')
