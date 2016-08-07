@@ -22,7 +22,7 @@ class TreePathController extends Controller
     }
 
     public static function getChildCount($parent_id){
-        return TreePath::where('ancestor_ids',$parent_id)->where('depth',1)->count();
+        return TreePath::where('ancestor_id',$parent_id)->where('depth',1)->count();
     }
 
     public static function getDescendantsCount($parent_id){
