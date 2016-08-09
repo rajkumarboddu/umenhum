@@ -12,24 +12,24 @@
     <!--Mobile Specific Meta Tag-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!--Favicon-->
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{url('favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{url('favicon.png')}}" type="image/x-icon">
     <!-- Pixeden Stroke Icons -->
-    <link href="css/vendor/pixeden.css" rel="stylesheet" media="screen">
+    <link href="{{url('css/vendor/pixeden.css')}}" rel="stylesheet" media="screen">
     <!-- All Theme Styles including Bootstrap, FontAwesome, etc. compiled from styles.scss-->
-    <link href="css/styles.css" rel="stylesheet" media="screen">
+    <link href="{{url('css/styles.css')}}" rel="stylesheet" media="screen">
     <!-- Style Switcher -->
-    <link href="style-switcher/style-switcher.css" rel="stylesheet" media="screen">
+    <link href="{{url('style-switcher/style-switcher.css')}}" rel="stylesheet" media="screen">
     <!--animation css file-->
-    <link rel="stylesheet" type="text/css" href="css/vendor/animate.css">
+    <link rel="stylesheet" type="text/css" href="{{url('css/vendor/animate.css')}}">
     <!--treeview-->
     {{--<link rel="stylesheet" href="css/vendor/jquery.jOrgChart.css"/>--}}
-    <link rel="stylesheet" href="css/vendor/custom.css"/>
-    <link rel="stylesheet" href="css/vendor/jquery.orgchart.css"/>
+    <link rel="stylesheet" href="{{url('css/vendor/custom.css')}}"/>
+    <link rel="stylesheet" href="{{url('css/vendor/jquery.orgchart.css')}}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <!--Modernizr / Detectizr-->
-    <script src="js/vendor/modernizr.custom.js"></script>
-    <script src="js/vendor/detectizr.min.js"></script>
+    <script src="{{url('js/vendor/modernizr.custom.js')}}"></script>
+    <script src="{{url('js/vendor/detectizr.min.js')}}"></script>
     <style>
         .orgchart .inactive .title{
             background-color: #e74c3c;
@@ -81,8 +81,8 @@
     <header class="navbar navbar-light navbar-sticky">
         <div class="container">
             <a href="{{url('/')}}" class="site-logo">
-                <img src="img/logo-default.png" class="logo-default img-responsive" alt="ZurApp">
-                <img src="img/logo-alt.png" class="logo-alt" alt="ZurApp">
+                <img src="{{url('img/logo-default.png')}}" class="logo-default img-responsive" alt="ZurApp">
+                <img src="{{url('img/logo-alt.png')}}" class="logo-alt" alt="ZurApp">
             </a><!-- .site-logo -->
 
             <!-- Mobile Menu Toggle -->
@@ -95,10 +95,10 @@
                 <!-- Use modifier class to apply different submenu (dropdown) animations. Possible options: .submenu-slideUp, .submenu-slideDown, .submenu-flipIn. Please note if no class added to .main-navigation default fadeIn animation will be applied. Note: this is applicable only for Desktop. -->
                 <nav class="main-navigation submenu-flipIn">
                     <ul class="menu">
-                        <li><a href="indexphp#home" class="scroll-to" data-offset-top="-40">Home</a></li>
-                        <li><a href="index.html#treeview" class="scroll-to" data-offset-top="-40">Treeview</a></li>
-                        <li><a href="index.html#about" class="scroll-to" data-offset-top="-40">About us</a></li>
-                        <li><a href="index.html#contact" class="scroll-to" data-offset-top="-40">Contact us</a></li>
+                        <li><a href="#home" class="scroll-to" data-offset-top="-40">Home</a></li>
+                        <li><a href="#treeview" class="scroll-to" data-offset-top="-40">Treeview</a></li>
+                        <li><a href="#about" class="scroll-to" data-offset-top="-40">About us</a></li>
+                        <li><a href="#contact" class="scroll-to" data-offset-top="-40">Contact us</a></li>
                     </ul>
                 </nav><!-- .main-navigation -->
             </div><!-- .clearfix -->
@@ -118,17 +118,17 @@
                       data-interval="3000" autoplay interval timeout in miliseconds
                      -->
                     <div class="phone-carousel" data-loop="true" data-autoplay="true" data-interval="4000">
-                        <img src="img/device-slider/phone.png" class="phone-mask wow slideInLeft" alt="Phone" data-wow-delay="1.0s">
+                        <img src="{{url('img/device-slider/phone.png')}}" class="phone-mask wow slideInLeft" alt="Phone" data-wow-delay="1.0s">
                         <!-- Fallback Cover Screen -->
                         <div class="cover wow slideInLeft" data-wow-delay="1.0s">
-                            <img src="img/device-slider/screen01.png" alt="Screen 1">
+                            <img src="{{url('img/device-slider/screen01.png')}}" alt="Screen 1">
                         </div>
                         <div class="carousel wow slideInLeft" data-wow-delay="1.0s">
                             <div class="inner">
-                                <img src="img/device-slider/screen001.png" alt="Screen 1">
-                                <img src="img/device-slider/screen002.png" alt="Screen 2">
-                                <img src="img/device-slider/screen003.png" alt="Screen 3">
-                                <img src="img/device-slider/screen004.png" alt="Screen 4">
+                                <img src="{{url('img/device-slider/screen001.png')}}" alt="Screen 1">
+                                <img src="{{url('img/device-slider/screen002.png')}}" alt="Screen 2">
+                                <img src="{{url('img/device-slider/screen003.png')}}" alt="Screen 3">
+                                <img src="{{url('img/device-slider/screen004.png')}}" alt="Screen 4">
                             </div>
                         </div>
                     </div><!-- .phone-carousel -->
@@ -148,7 +148,7 @@
 
                     <!-- Google Play Button -->
                     <a href="#" class="btn btn-google-play">
-                        <img src="img/google-play.png" alt="Google Play">
+                        <img src="{{url('img/google-play.png')}}" alt="Google Play">
                         <span>Get it on</span>
                     </a>
                 </div>
@@ -182,7 +182,7 @@
             </div><!-- .col-md-5.col-md-push-7 -->
 
             <div class="col-md-7 col-md-pull-5">
-                <img src="img/home/screen02.jpg" class="block-center wow rollIn" alt="Screen 2" data-wow-delay="0.9s">
+                <img src="{{url('img/home/screen02.jpg')}}" class="block-center wow rollIn" alt="Screen 2" data-wow-delay="0.9s">
             </div><!-- .col-md-7.col-md-pull-5 -->
         </div><!-- .row -->
         <div class="row" style="margin-top:30px">
@@ -285,29 +285,28 @@
 </div><!-- .page-wrapper -->
 
 <!-- JavaScript (jQuery) libraries, plugins and custom scripts -->
-<script src="js/vendor/jquery-2.1.4.min.js"></script>
-<script src="js/vendor/preloader.min.js"></script>
-<script src="js/vendor/placeholder.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/vendor/smoothscroll.js"></script>
-<script src="js/vendor/velocity.min.js"></script>
-<script src="js/vendor/magnific-popup.min.js"></script>
-<script src="js/vendor/owl.carousel.min.js"></script>
-<script src="js/vendor/jquery.orgchart.js"></script>
-<script type="text/javascript" src="js/vendor/prettify.js"></script>
-{{--<script src="js/vendor/jquery.jOrgChart.js"></script>--}}
+<script src="{{url('js/vendor/jquery-2.1.4.min.js')}}"></script>
+<script src="{{url('js/vendor/preloader.min.js')}}"></script>
+<script src="{{url('js/vendor/placeholder.js')}}"></script>
+<script src="{{url('js/vendor/bootstrap.min.js')}}"></script>
+<script src="{{url('js/vendor/smoothscroll.js')}}"></script>
+<script src="{{url('js/vendor/velocity.min.js')}}"></script>
+<script src="{{url('js/vendor/magnific-popup.min.js')}}"></script>
+<script src="{{url('js/vendor/owl.carousel.min.js')}}"></script>
+<script src="{{url('js/vendor/jquery.orgchart.js')}}"></script>
+<script type="text/javascript" src="{{url('js/vendor/prettify.js')}}"></script>
+{{--<script src="{{url('js/vendor/jquery.jOrgChart.js')}}"></script>--}}
 
-<script src="js/scripts.js"></script>
-<script src="style-switcher/style-switcher.js"></script>
-<script src="js/vendor/wow.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/sweetalert.min.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
+<script src="{{url('js/scripts.js')}}"></script>
+<script src="{{url('style-switcher/style-switcher.js')}}"></script>
+<script src="{{url('js/vendor/wow.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{url('js/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{url('js/common.js')}}"></script>
 <script type="text/javascript">
     new WOW().init();
 </script>
 <script>
     jQuery(document).ready(function() {
-
         $('#chart-container').orgchart({
             'data' : "{{url('getSubTree/'.Auth::user()->id)}}"
         });
