@@ -33,9 +33,10 @@ class TreePathController extends Controller
         $children = DB::table('tree_paths as t')
                 ->join('users as u','u.id','=','t.descendant_id')
                 ->where('ancestor_id',$parent_id)->where('depth',1)
-                ->select('u.first_name as name','u.status','t.*',DB::raw('(case when u.status=0 then "inactive" else "active" end) as className'))
+                ->select('u.first_name as name','u.status','t.*',
+                    DB::raw('(case when u.status=0 then "inactive" else "active" end) as className'),'u.id')
                 ->get();
-        $children = Utils::unsetAttributes($children,['created_at','updated_at','id']);
+        $children = Utils::unsetAttributes($children,['created_at','updated_at']);
         foreach($children as $child){
             $child->name = str_limit($child->name,10);
         }
@@ -78,18 +79,18 @@ class TreePathController extends Controller
         return $node;
     }
 
-    public function printNode($node,$html=''){
-        $class = ($node->status==0) ? "inactive" : "active" ;
+/*    public function printNode($node,$html=''){
+//        $class = ($node->status==0) ? "inactive" : "active" ;
         if(count($node->children)>0) {
-            $html .= '<ul><li><div class="status '.$class.'"></div>'.$node->first_name;
+            $html .= '<ul><li><div class="status '.$node->className.'"></div>'.$node->first_name.$node->id;
             foreach($node->children as $child){
                $html .= $this->printNode($child);
             }
             $html .= '</li></ul>';
         } else {
-            $html .= '<li><div class="status '.$class.'"></div>'.$node->first_name.'</li>';
+            $html .= '<li><div class="status '.$node->className.'"></div>'.$node->first_name.$node->id.'</li>';
         }
         return $html;
-    }
+    }*/
 
 }

@@ -308,7 +308,8 @@
 <script>
     jQuery(document).ready(function() {
         $('#chart-container').orgchart({
-            'data' : "{{url('getSubTree/'.Auth::user()->id)}}"
+            'data' : "{{url('getSubTree/'.Auth::user()->id)}}",
+            'nodeContent' : 'nodeContent'
         });
 
         /*$('#chart').prev().attr('id','org');
