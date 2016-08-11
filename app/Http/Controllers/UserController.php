@@ -52,8 +52,8 @@ class UserController extends Controller
         if($tmp_user_ctrl->store($request)){
             // send otp for confirmation
             $msg = $request->otp." is OTP for mobile verification from umenhum.com";
-//            $sent = MainController::sendOtp($request->mobile,$msg);
-            if($sent=true){
+            $sent = MainController::sendOtp($request->mobile,$msg);
+            if($sent==true){
                 return response()->json('OTP send successfully',200);
             }
             return response()->json('Unable send OTP',500);
