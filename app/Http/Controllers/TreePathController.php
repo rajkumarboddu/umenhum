@@ -26,7 +26,7 @@ class TreePathController extends Controller
     }
 
     public static function getDescendantsCount($parent_id){
-        return TreePath::where('ancestor_id',$parent_id)->count();
+        return TreePath::where('ancestor_id',$parent_id)->where('descendant_id','<>',$parent_id)->count();
     }
 
     public function getChildren($parent_id){
@@ -76,7 +76,7 @@ class TreePathController extends Controller
 
     public function traverseNode($node){
         $node->children = $this->getChildren($node->descendant_id);
-        $node->name .= '<span class="children-count">'.count($node->children).'</span>';
+        $node->name .= '<span class="children-count">'.self::getDescendantsCount($node->descendant_id).'</span>';
         foreach($node->children as $key => $child){
             $node->children[$key] = $this->traverseNode($child);
         }
