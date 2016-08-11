@@ -31,6 +31,18 @@
     <script src="{{url('js/vendor/modernizr.custom.js')}}"></script>
     <script src="{{url('js/vendor/detectizr.min.js')}}"></script>
     <style>
+        .orgchart .node .title {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #fff;
+            border-radius:0px;
+        }
         .orgchart .inactive .title{
             background-color: #e74c3c;
         }
@@ -44,6 +56,10 @@
             width: 100%;
             background: none;
         }
+        .orgchart .node{
+            min-width: 200px;
+            cursor: pointer;
+        }
         #greeting-text{
             color: white;
             font-weight: bold;
@@ -55,6 +71,19 @@
             padding: 10px;
             margin-right: 80px;
             margin-left: 50px;
+        }
+        .children-count{
+            display: inline-block;
+            position: absolute;
+            right: 8px;
+            background: white;
+            color: black;
+            padding: 3px 5px 3px 7px;
+            height: 20px;
+            line-height: 1;
+            margin-top: 5px;
+            font-size: small;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -307,9 +336,23 @@
 </script>
 <script>
     jQuery(document).ready(function() {
+        var present_root = '{{Auth::user()->id}}';
         $('#chart-container').orgchart({
             'data' : "{{url('getSubTree/'.Auth::user()->id)}}",
-            'nodeContent' : 'nodeContent'
+            'depth' : 2
+        });
+
+        $(document).on('click','.node',function(){
+            var root_id = $(this).find('.node-id').html();
+            if(root_id==present_root){
+                return;
+            }
+            $('#chart-container').html('');
+            $('#chart-container').orgchart({
+                'data' : "{{url('getSubTree/')}}"+'/'+root_id,
+                'depth' : 2
+            });
+            present_root = root_id;
         });
 
         /*$('#chart').prev().attr('id','org');

@@ -38,7 +38,8 @@ class TreePathController extends Controller
                 ->get();
         $children = Utils::unsetAttributes($children,['created_at','updated_at']);
         foreach($children as $child){
-            $child->name = str_limit($child->name,10);
+//            $child->name = str_limit($child->name,10);
+            $child->name .= '<span class="hide node-id">'.$child->id.'</span>';
         }
         return $children;
     }
@@ -65,7 +66,9 @@ class TreePathController extends Controller
         order by parent_id,depth,id
         ");*/
         $this->root = DB::table('users')->where('id',$parent_id)
-                        ->select('id as descendant_id','first_name as name','status',DB::raw('(case when status=0 then "inactive" else "active" end) as className'))->first();
+                        ->select('id as descendant_id','first_name as name','status',
+                            DB::raw('(case when status=0 then "inactive" else "active" end) as className'))->first();
+        $this->root->name .= '<span class="hide node-id">'.$this->root->descendant_id.'</span>';
         $tree = $this->traverseNode($this->root);
         return response()->json($tree,200);
 //        return $this->printNode($tree);
@@ -73,6 +76,7 @@ class TreePathController extends Controller
 
     public function traverseNode($node){
         $node->children = $this->getChildren($node->descendant_id);
+        $node->name .= '<span class="children-count">'.count($node->children).'</span>';
         foreach($node->children as $key => $child){
             $node->children[$key] = $this->traverseNode($child);
         }
