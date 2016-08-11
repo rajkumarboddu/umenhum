@@ -189,7 +189,7 @@
             <div class="block-title featured-title">
                 <h2>Treeview</h2>
             </div>
-            {{--<button id="tree-back-btn" class="btn btn-primary btn-sm hide">Back</button>--}}
+            <button id="tree-back-btn" class="btn btn-primary btn-sm hide">Back</button>
             <div id="chart-container"></div>
         </div>
     </section>
@@ -337,6 +337,7 @@
 <script>
     jQuery(document).ready(function() {
         var present_root = '{{Auth::user()->id}}';
+        var node_history = ['{{Auth::user()->id}}'];
         $('#chart-container').orgchart({
             'data' : "{{url('getSubTree/'.Auth::user()->id)}}",
             'depth' : 2
@@ -352,7 +353,24 @@
                 'data' : "{{url('getSubTree/')}}"+'/'+root_id,
                 'depth' : 2
             });
+            node_history.push(present_root);
             present_root = root_id;
+            $('#tree-back-btn').removeClass('hide');
+        });
+
+        $('#tree-back-btn').click(function(){
+            if(node_history.length>=2){
+                var node_id = node_history.pop();
+                $('#chart-container').html('');
+                $('#chart-container').orgchart({
+                    'data' : "{{url('getSubTree/')}}"+'/'+node_id,
+                    'depth' : 2
+                });
+                present_root = node_id;
+                if(node_history.length==1){
+                    $(this).addClass('hide');
+                }
+            }
         });
 
         /*$('#chart').prev().attr('id','org');
