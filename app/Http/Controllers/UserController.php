@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Helpers\Utils;
 
@@ -190,5 +191,66 @@ class UserController extends Controller
     public function doLogout(){
         Auth::logout();
         return redirect('/');
+    }
+
+    public function forgotPasswordPage(){
+        return view('forgot-pwd');
+    }
+
+    public function forgotPassword(Request $request){
+        $validator = Validator::make($request->all(),[
+            'mobile' => 'required|exists:users,mobile'
+        ],[
+            'mobile.exists' => 'User Account not found with this mobile number'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->all()[0],449);
+        }
+        $user = User::where('mobile',$request->mobile)->first();
+        if($user){
+            $reset_token = md5($user->mobile.$user->email);
+            $user->reset_token = $reset_token;
+            $msg_body = 'Click the link to reset your password. '.url('resetPassword/'.$reset_token);
+            $response = Mail::raw($msg_body, function ($message) use($user) {
+                $message->from('royaltrovesolutions@gmail.com', 'Royal Trove');
+                $message->to($user->email, $user->first_name);
+                $message->subject('Roytal Trove - Reset Password Link');
+            });
+            if($response){
+                $user->save();
+                return response()->json('Reset link has been sent to your registered mail',200);
+            } else{
+                return response()->json('Internal server error',500);
+            }
+        } else{
+            return response()->json('User not found',404);
+        }
+    }
+
+    public function resetPasswordPage($reset_token){
+        $user = User::where('reset_token',$reset_token)->first();
+        if($user){
+            return view('reset-pwd')->with('reset_token',$reset_token);
+        } else{
+            return view('reset-pwd')->with('invalid_link','Invalid reset link');
+        }
+    }
+
+    public function resetPassword(Request $request){
+        $validator = Validator::make($request->all(),[
+            'new_password' => 'required|confirmed'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->all()[0],449);
+        }
+        $user = User::where('reset_token',$request->reset_token)->first();
+        if($user){
+            $user->password = bcrypt($request->new_password);
+            $user->reset_token = '';
+            $user->save();
+            return response()->json('Password changed successfully',200);
+        } else{
+            return response()->json('Invalid reset link',403);
+        }
     }
 }

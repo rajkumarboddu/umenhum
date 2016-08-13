@@ -17,6 +17,10 @@ Route::get('signup', 'MainController@loadSignupPage');
 Route::post('signup/sendOtp','UserController@sendOtpForSignup');
 Route::post('signup/verifyOtp','UserController@verifyOtpForSignup');
 Route::post('doLogin','UserController@doLogin');
+Route::get('forgotPassword','UserController@forgotPasswordPage');
+Route::post('forgotPassword','UserController@forgotPassword');
+Route::get('resetPassword/{reset_token}','UserController@resetPasswordPage');
+Route::post('resetPassword','UserController@resetPassword');
 
 Route::group(['middleware' => 'auth'],function(){
     Route::get('dashboard','MainController@loadDashboardPage');

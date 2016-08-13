@@ -14,3 +14,7 @@ function hideLoadingPopup(){
 function reloadMe(time){
     window.setTimeout(function(){location.reload()},time);
 }
+
+function redirectTo(link,time){
+    window.setTimeout(function(){window.location.href=link},time);
+}

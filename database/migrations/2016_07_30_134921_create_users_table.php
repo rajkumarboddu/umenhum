@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('credits_balance');
             $table->string('otp');
             $table->integer('status')->default(0);
+            $table->integer('reset_token');
             $table->softDeletes();
             $table->timestamps();
         });
