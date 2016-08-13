@@ -32,7 +32,7 @@
     <script src="{{url('js/vendor/detectizr.min.js')}}"></script>
     <style>
         .orgchart .node .title {
-            text-align: center;
+            text-align: left;
             font-size: 15px;
             font-weight: bold;
             height: 30px;
@@ -42,6 +42,7 @@
             white-space: nowrap;
             color: #fff;
             border-radius:0px;
+            padding-left: 5px;
         }
         .orgchart .inactive .title{
             background-color: #e74c3c;

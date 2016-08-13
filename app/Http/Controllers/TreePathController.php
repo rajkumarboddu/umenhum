@@ -76,7 +76,7 @@ class TreePathController extends Controller
 
     public function traverseNode($node){
         $node->children = $this->getChildren($node->descendant_id);
-        $node->name .= '<span class="children-count">'.self::getDescendantsCount($node->descendant_id).'</span>';
+        $node->name .= '<span class="children-count">'.count($node->children).' / '.self::getDescendantsCount($node->descendant_id).'</span>';
         foreach($node->children as $key => $child){
             $node->children[$key] = $this->traverseNode($child);
         }
