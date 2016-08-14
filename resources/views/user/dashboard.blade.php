@@ -31,18 +31,10 @@
     <script src="{{url('js/vendor/modernizr.custom.js')}}"></script>
     <script src="{{url('js/vendor/detectizr.min.js')}}"></script>
     <style>
-        .orgchart .node .title {
-            text-align: left;
-            font-size: 15px;
-            font-weight: bold;
-            height: 30px;
-            line-height: 30px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: #fff;
-            border-radius:0px;
-            padding-left: 5px;
+        .orgchart.l2r{
+            position: static;
+            background: none;
+            height: 100%;
         }
         .orgchart .inactive .title{
             background-color: #e74c3c;
@@ -50,16 +42,34 @@
         .orgchart .active .title{
             background-color: #2ecc71;
         }
-        .orgchart .title .fa{
-            display: none;
+        .orgchart.l2r .node, .orgchart.r2l .node {
+            width: 76px;
+            height: 150px;
         }
-        .orgchart{
-            width: 100%;
+        .orgchart .node:hover{
             background: none;
         }
-        .orgchart .node{
-            min-width: 200px;
-            cursor: pointer;
+        .orgchart .node.focused{
+            background: none;
+        }
+        .orgchart.l2r .node .title{
+            text-align: left;
+            padding-left: 5px;
+            width: 150px;
+            padding-top: 2px;
+            height: 25px;
+        }
+        .orgchart.l2r .node .content{
+            padding: 3px 0px 3px 0px;
+            height: auto;
+            width: 150px;
+            border-radius: 0px;
+        }
+        .orgchart td {
+            padding: 10px 0px 0px 0px;
+        }
+        .orgchart.l2r .node .title .fa{
+            display: none;
         }
         #greeting-text{
             color: white;
@@ -76,15 +86,35 @@
         .children-count{
             display: inline-block;
             position: absolute;
-            right: 8px;
+            right: 5px;
             background: white;
             color: black;
             padding: 3px 5px 3px 7px;
-            height: 20px;
             line-height: 1;
-            margin-top: 5px;
-            font-size: small;
-            border-radius: 50%;
+            margin-top: 3px;
+            font-size: x-small;
+            border-radius: 5px;
+        }
+        .help-text{
+            font-size: x-small;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .help-text.active:before{
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            content: '';
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .help-text.inactive:before{
+            width: 10px;
+            height: 10px;
+            background: #e74c3c;
+            content: '';
+            display: inline-block;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -190,6 +220,9 @@
             <div class="block-title featured-title">
                 <h2>Treeview</h2>
             </div>
+            <div class="help-text active"> - Active</div>
+            <div class="help-text inactive"> - In-active</div>
+            <br><br>
             <button id="tree-back-btn" class="btn btn-primary btn-sm hide">Back</button>
             <div id="chart-container"></div>
         </div>
@@ -341,7 +374,9 @@
         var node_history = ['{{Auth::user()->id}}'];
         $('#chart-container').orgchart({
             'data' : "{{url('getSubTree/'.Auth::user()->id)}}",
-            'depth' : 2
+            'nodeContent' : 'referralCode',
+            'depth' : 2,
+            'direction': 'l2r',
         });
 
         $(document).on('click','.node',function(){
@@ -352,6 +387,8 @@
             $('#chart-container').html('');
             $('#chart-container').orgchart({
                 'data' : "{{url('getSubTree/')}}"+'/'+root_id,
+                'nodeContent' : 'referralCode',
+                'direction': 'l2r',
                 'depth' : 2
             });
             node_history.push(present_root);
@@ -365,6 +402,8 @@
                 $('#chart-container').html('');
                 $('#chart-container').orgchart({
                     'data' : "{{url('getSubTree/')}}"+'/'+node_id,
+                    'nodeContent' : 'referralCode',
+                    'direction': 'l2r',
                     'depth' : 2
                 });
                 present_root = node_id;

@@ -34,7 +34,8 @@ class TreePathController extends Controller
                 ->join('users as u','u.id','=','t.descendant_id')
                 ->where('ancestor_id',$parent_id)->where('depth',1)
                 ->select('u.first_name as name','u.status','t.*',
-                    DB::raw('(case when u.status=0 then "inactive" else "active" end) as className'),'u.id')
+                    DB::raw('(case when u.status=0 then "inactive" else "active" end) as className'),'u.id',
+                    'referral_code as referralCode')
                 ->get();
         $children = Utils::unsetAttributes($children,['created_at','updated_at']);
         foreach($children as $child){
@@ -67,7 +68,8 @@ class TreePathController extends Controller
         ");*/
         $this->root = DB::table('users')->where('id',$parent_id)
                         ->select('id as descendant_id','first_name as name','status',
-                            DB::raw('(case when status=0 then "inactive" else "active" end) as className'))->first();
+                            DB::raw('(case when status=0 then "inactive" else "active" end) as className'),
+                            'referral_code as referralCode')->first();
         $this->root->name .= '<span class="hide node-id">'.$this->root->descendant_id.'</span>';
         $tree = $this->traverseNode($this->root);
         return response()->json($tree,200);
