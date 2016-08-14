@@ -16,6 +16,14 @@
     <script type="text/javascript" src="{{url('js/bootstrap/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/sweetalert.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/common.js')}}"></script>
+    <style>
+        #referred-by{
+            color: red;
+            font-size: small;
+            margin: 10px 0px 10px 0px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper container">
@@ -93,8 +101,8 @@
                 </div>
                 <div class="col-md-6">
                     <label>Referrel Id</label>
-                    <input type="text" placeholder="Referral Id" name="referral_code" />
-                    <span class="error">This is an error</span>
+                    <input type="text" placeholder="Referral Id" name="referral_code" id="referral_code" />
+                    <span id="referred-by">Referrer Name: </span>
                 </div>
                 <div class="bottom">
                     <a href="{{url('/')}}"  style="font-size: 16px;float: left;">Cancel</a>
@@ -149,6 +157,24 @@
                 setTimeout(function(){
                     window.location.href = '{{url("login")}}';
                 },1000);
+            }).fail(function(responseObj){
+                swal('Oops!',responseObj.responseText,'error');
+            });
+        });
+        $('#referral_code').blur(function(){
+            var referral_code = $(this).val();
+            if(referral_code.length<6){
+                $('#referred-by').hide();
+                return;
+            }
+            showLoadingPopup();
+            $.ajax({
+                url : '{{url("getReferrerName")}}'+'/'+referral_code,
+                method: 'get'
+            }).done(function(response){
+                $('#referred-by').html($('#referred-by').html()+response);
+                $('#referred-by').css('display','inline-block');
+                hideLoadingPopup();
             }).fail(function(responseObj){
                 swal('Oops!',responseObj.responseText,'error');
             });

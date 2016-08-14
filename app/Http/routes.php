@@ -14,6 +14,7 @@
 Route::get('/', 'MainController@loadIndexPage');
 Route::get('login', 'MainController@loadLoginPage');
 Route::get('signup', 'MainController@loadSignupPage');
+Route::get('getReferrerName/{referrer_code}', 'UserController@getUserNameByReferralCode');
 Route::post('signup/sendOtp','UserController@sendOtpForSignup');
 Route::post('signup/verifyOtp','UserController@verifyOtpForSignup');
 Route::post('doLogin','UserController@doLogin');

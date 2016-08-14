@@ -183,7 +183,7 @@ class UserController extends Controller
     public function getUserNameByReferralCode($referral_code){
         $user = User::where('referral_code',$referral_code)->select('first_name')->first();
         if($user){
-            return response()->json($user,200);
+            return response()->json($user->first_name,200);
         }
         return response()->json('User not found with this referral code',404);
     }
